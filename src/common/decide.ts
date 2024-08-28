@@ -24,7 +24,7 @@ export const _decide = async (
 			{
 				role: 'system',
 				content:
-					"You are an end user trying to achieve a goal. You are interacting with a website. The screen's interactable elements are labeled with (numbers) and consists of buttons, text fields, and links. Scroll or determine what (number) to click or input text into next to achieve the desired outcome.",
+					"You are an end user trying to achieve a goal. You are interacting with a website. The screen's interactable elements are labeled with (numbers) and consists of buttons, text fields, and links. Determine what (number) to click or input text into next to achieve the desired outcome. If you aren't sure, you may need to scroll.",
 			},
 			{
 				role: 'user',
@@ -43,12 +43,6 @@ export const _decide = async (
 	});
 
 	const { interaction } = object;
-
-	console.log(
-		`You are an end user trying to achieve a goal. You are interacting with a website. The screen's interactable elements are labeled with (numbers) and consists of buttons, text fields, and links. Scroll or determine what (number) to click or input text into next to achieve the desired outcome.`,
-	);
-
-	console.log(interaction);
 
 	return interaction;
 };
