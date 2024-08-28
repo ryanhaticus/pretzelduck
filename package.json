@@ -1,0 +1,38 @@
+{
+  "name": "pretzelduck",
+  "author": "Ryan Huellen <ryan@toolshedllc.com>",
+  "version": "1.0.0",
+  "description": "Low cost end-to-end testing with Playwright and AI",
+  "scripts": {
+    "build": "rm -rf ./lib && tsc",
+    "fix": "biome check --write ./src",
+    "lint": "biome lint ./src",
+    "test": "biome ci ./src && jest"
+  },
+  "keywords": [
+    "pretzelduck",
+    "playwright",
+    "typescript",
+    "ai",
+    "test",
+    "e2e"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "@ai-sdk/openai": "^0.0.54",
+    "@playwright/test": "^1.46.1",
+    "ai": "^3.3.19",
+    "lodash": "^4.17.21",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^1.8.3",
+    "@types/jest": "^29.5.12",
+    "@types/lodash": "^4.17.7",
+    "@types/node": "^22.5.0",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.2.5",
+    "tsx": "^4.19.0",
+    "typescript": "^5.5.4"
+  }
+}
