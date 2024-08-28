@@ -1,7 +1,6 @@
 import type { LanguageModel } from 'ai';
 import type { TestOptions } from '../types/TestOptions';
-
-import { test } from '@playwright/test';
+import type { PlaywrightTest } from '../types/PlaywrightTest';
 
 import _ from 'lodash';
 import { InteractableElements } from '../types/InteractableElements';
@@ -12,6 +11,7 @@ import { _decide } from './decide';
 import { _interact } from './interact';
 
 export const _test = (
+	test: PlaywrightTest,
 	languageModel: LanguageModel,
 	goal: string,
 	assertion: string,

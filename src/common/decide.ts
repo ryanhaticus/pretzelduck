@@ -41,5 +41,6 @@ export const _decide = async (
 		],
 	});
 
-	return object;
+	const { interaction } = object;
+	return interaction;
 };

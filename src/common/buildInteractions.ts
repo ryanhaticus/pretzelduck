@@ -1,8 +1,9 @@
-import type { ZodTypeAny } from 'zod';
+import { z } from 'zod';
 import { ClickInteraction } from '../schemas/ClickInteraction';
 import { InputInteraction } from '../schemas/InputInteraction';
 import { ScrollInteraction } from '../schemas/ScrollInteraction';
 
+import type { ZodTypeAny } from 'zod';
 import type { InteractionSchema } from '../schemas/Interaction';
 import type { InteractionLabels } from '../types/InteractionLabels';
 
@@ -38,5 +39,5 @@ export const buildInteractions = (interactionLabels: InteractionLabels[]) => {
 		throw new Error('No interactions found');
 	}
 
-	return interactions as InteractionSchema;
+	return z.object({ interaction: interactions as InteractionSchema });
 };

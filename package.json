@@ -22,13 +22,16 @@
   "license": "MIT",
   "dependencies": {
     "@ai-sdk/openai": "^0.0.54",
-    "@playwright/test": "^1.46.1",
     "ai": "^3.3.19",
     "lodash": "^4.17.21",
     "zod": "^3.23.8"
   },
+  "peerDependencies": {
+    "@playwright/test": "^1.46.1"
+  },
   "devDependencies": {
     "@biomejs/biome": "^1.8.3",
+    "@playwright/test": "^1.46.1",
     "@types/jest": "^29.5.12",
     "@types/lodash": "^4.17.7",
     "@types/node": "^22.5.0",
