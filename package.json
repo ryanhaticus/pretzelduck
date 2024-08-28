@@ -3,6 +3,8 @@
   "author": "Ryan Huellen <ryan@toolshedllc.com>",
   "version": "1.0.0",
   "description": "Low cost end-to-end testing with Playwright and AI",
+  "main": "./lib/index.js",
+  "types": "./lib/index.d.ts",
   "scripts": {
     "build": "rm -rf ./lib && tsc",
     "fix": "biome check --write ./src",
