@@ -11,6 +11,7 @@ export const _decide = async (
 	page: Page,
 	interactionLabels: InteractionLabels[],
 	maxRetriesPerInteraction: number,
+	decisionTemperature: number,
 ) => {
 	const interactions = buildInteractions(interactionLabels);
 
@@ -20,11 +21,12 @@ export const _decide = async (
 		model: languageModel,
 		schema: interactions,
 		maxRetries: maxRetriesPerInteraction,
+		temperature: decisionTemperature,
 		messages: [
 			{
 				role: 'system',
 				content:
-					"You are an end user trying to achieve a goal. You are interacting with a website. The screen's interactable elements are labeled with (numbers) and consists of buttons, text fields, and links. Determine what (number) to click or input text into next to achieve the desired outcome. If you aren't sure, you may need to scroll.",
+					"You are an end user trying to achieve a goal. You are interacting with a website. The screen's interactable elements are labeled with (numbers) and consists of buttons, text fields, and links. Please determine what (number) to click or input text into next to achieve the desired outcome. Be careful as you aren't able to click on or input within an element twice. If you aren't sure, you may need to scroll. Validation interaction types are `scroll`, `click`, and `input`.",
 			},
 			{
 				role: 'user',

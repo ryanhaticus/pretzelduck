@@ -15,7 +15,10 @@ export const _interact = async (page: Page, interaction: Interaction) => {
 	/* Element Interactions */
 	const { annotation } = interaction;
 
-	const element = await page.getByText(`(${annotation})`);
+	const element = await page
+		.locator(`[placeholder*="(${annotation})"]`)
+		.or(page.locator(`[value*="(${annotation})"]`))
+		.or(page.getByText(`(${annotation})`));
 
 	if (type === 'click') {
 		await element.click();
@@ -28,4 +31,6 @@ export const _interact = async (page: Page, interaction: Interaction) => {
 		await element.fill(value);
 		return element;
 	}
+
+	await page.waitForLoadState('networkidle');
 };

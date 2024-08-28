@@ -7,6 +7,7 @@ export const _assert = async (
 	page: Page,
 	assertion: string,
 	maxRetriesPerAssertion: number,
+	assertionTemperature: number,
 ) => {
 	const screenshot = await page.screenshot();
 
@@ -14,6 +15,7 @@ export const _assert = async (
 		model: languageModel,
 		schema: Assertion,
 		maxRetries: maxRetriesPerAssertion,
+		temperature: assertionTemperature,
 		messages: [
 			{
 				role: 'system',

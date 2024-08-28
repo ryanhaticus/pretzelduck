@@ -24,6 +24,8 @@ export const _test = (
 		maxRetriesPerInteraction,
 		maxRetriesPerAssertion,
 		forcedProgression,
+		decisionTemperature,
+		assertionTemperature,
 	}: TestOptions,
 ) =>
 	test(goal, async ({ page }) => {
@@ -38,9 +40,14 @@ export const _test = (
 		).join(', ');
 
 		let interactionCount = 0;
+		let previousPageURL: string | undefined = undefined;
 
 		do {
-			await _annotate(page, interactableElementsSelector);
+			if (previousPageURL !== page.url()) {
+				await _annotate(page, interactableElementsSelector);
+
+				previousPageURL = page.url();
+			}
 
 			const interaction = await _decide(
 				languageModel,
@@ -48,12 +55,17 @@ export const _test = (
 				page,
 				interactionLabels,
 				maxRetriesPerInteraction,
+				decisionTemperature,
 			);
 
 			const element = await _interact(page, interaction);
 			interactionCount++;
 
-			if (forcedProgression && element !== undefined) {
+			if (
+				forcedProgression &&
+				previousPageURL === page.url() &&
+				element !== undefined
+			) {
 				await progress(element);
 			}
 
@@ -62,6 +74,7 @@ export const _test = (
 				page,
 				assertion,
 				maxRetriesPerAssertion,
+				assertionTemperature,
 			);
 
 			if (goalAchieved) {

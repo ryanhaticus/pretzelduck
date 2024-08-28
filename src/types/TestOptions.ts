@@ -8,4 +8,6 @@ export type TestOptions = {
 	disabledInteractions: InteractionLabels[];
 	maxRetriesPerAssertion: number;
 	forcedProgression: boolean;
+	decisionTemperature: number;
+	assertionTemperature: number;
 };
