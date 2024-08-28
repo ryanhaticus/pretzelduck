@@ -1,6 +1,6 @@
 import type { LanguageModel } from './index';
-import type { TestOptions } from './types/TestOptions';
 import type { PlaywrightTest } from './types/PlaywrightTest';
+import type { TestOptions } from './types/TestOptions';
 
 import _ from 'lodash';
 import { _test } from './common/test';
@@ -19,6 +19,7 @@ export class PretzelDuck {
 			disabledInteractableElements: [],
 			disabledInteractions: [],
 			maxRetriesPerAssertion: 2,
+			forcedProgression: true,
 		},
 	) {
 		this.playwrightTest = playwrightTest;

@@ -19,13 +19,13 @@ export const _interact = async (page: Page, interaction: Interaction) => {
 
 	if (type === 'click') {
 		await element.click();
-		return;
+		return element;
 	}
 
 	if (type === 'input') {
 		const { value } = interaction;
 
 		await element.fill(value);
-		return;
+		return element;
 	}
 };

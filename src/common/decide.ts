@@ -1,7 +1,8 @@
 import type { Page } from '@playwright/test';
+import { type LanguageModel, generateObject } from 'ai';
+import type { Interaction } from '../schemas/Interaction';
 import type { InteractionLabels } from '../types/InteractionLabels';
 
-import { type LanguageModel, generateObject } from 'ai';
 import { buildInteractions } from './buildInteractions';
 
 export const _decide = async (
@@ -42,5 +43,12 @@ export const _decide = async (
 	});
 
 	const { interaction } = object;
+
+	console.log(
+		`You are an end user trying to achieve a goal. You are interacting with a website. The screen's interactable elements are labeled with (numbers) and consists of buttons, text fields, and links. Scroll or determine what (number) to click or input text into next to achieve the desired outcome.`,
+	);
+
+	console.log(interaction);
+
 	return interaction;
 };

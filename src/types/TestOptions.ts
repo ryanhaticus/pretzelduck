@@ -7,4 +7,5 @@ export type TestOptions = {
 	disabledInteractableElements: InteractableElements[];
 	disabledInteractions: InteractionLabels[];
 	maxRetriesPerAssertion: number;
+	forcedProgression: boolean;
 };

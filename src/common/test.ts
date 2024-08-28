@@ -1,6 +1,7 @@
 import type { LanguageModel } from 'ai';
-import type { TestOptions } from '../types/TestOptions';
+import type { Interaction } from '../schemas/Interaction';
 import type { PlaywrightTest } from '../types/PlaywrightTest';
+import type { TestOptions } from '../types/TestOptions';
 
 import _ from 'lodash';
 import { InteractableElements } from '../types/InteractableElements';
@@ -9,6 +10,7 @@ import { _annotate } from './annotate';
 import { _assert } from './assert';
 import { _decide } from './decide';
 import { _interact } from './interact';
+import { progress } from './progress';
 
 export const _test = (
 	test: PlaywrightTest,
@@ -21,6 +23,7 @@ export const _test = (
 		maxInteractions,
 		maxRetriesPerInteraction,
 		maxRetriesPerAssertion,
+		forcedProgression,
 	}: TestOptions,
 ) =>
 	test(goal, async ({ page }) => {
@@ -37,9 +40,7 @@ export const _test = (
 		let interactionCount = 0;
 
 		do {
-			const interactableElements = await page.$$(interactableElementsSelector);
-
-			await _annotate(interactableElements);
+			await _annotate(page, interactableElementsSelector);
 
 			const interaction = await _decide(
 				languageModel,
@@ -49,8 +50,12 @@ export const _test = (
 				maxRetriesPerInteraction,
 			);
 
-			await _interact(page, interaction);
+			const element = await _interact(page, interaction);
 			interactionCount++;
+
+			if (forcedProgression && element !== undefined) {
+				await progress(element);
+			}
 
 			const goalAchieved = await _assert(
 				languageModel,

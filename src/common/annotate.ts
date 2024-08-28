@@ -1,12 +1,22 @@
-import type { ElementHandle } from '@playwright/test';
+import type { Page } from '@playwright/test';
 
-export const _annotate = (
-	elements: ElementHandle<SVGElement | HTMLElement>[],
-) =>
-	Promise.all(
-		elements.map((element, index) =>
-			element.evaluate((node, ind) => {
-				node.textContent = `${node.textContent}(${ind})`;
-			}, index),
-		),
-	);
+export const _annotate = (page: Page, interactableElementsSelector: string) =>
+	page.evaluate((interactableElementsSelector) => {
+		if (Object.hasOwn(window, 'PRETZEL_DUCK')) {
+			return;
+		}
+
+		Object.assign(window, {
+			PRETZEL_DUCK: true,
+		});
+
+		const elements = document.querySelectorAll(interactableElementsSelector);
+
+		let annotation = 0;
+
+		for (const element of elements) {
+			element.textContent = `${element.textContent} (${annotation})`;
+
+			annotation++;
+		}
+	}, interactableElementsSelector);
