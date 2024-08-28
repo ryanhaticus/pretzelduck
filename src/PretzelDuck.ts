@@ -20,7 +20,7 @@ export class PretzelDuck {
 			disabledInteractions: [],
 			maxRetriesPerAssertion: 2,
 			forcedProgression: true,
-			decisionTemperature: 0.8,
+			decisionTemperature: 0.4,
 			assertionTemperature: 0.1,
 		},
 	) {
