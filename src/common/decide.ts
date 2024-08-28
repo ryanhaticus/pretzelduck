@@ -15,7 +15,9 @@ export const _decide = async (
 ) => {
 	const interactions = buildInteractions(interactionLabels);
 
-	const screenshot = await page.screenshot();
+	const screenshot = await page.screenshot({
+		fullPage: true,
+	});
 
 	const { object } = await generateObject({
 		model: languageModel,

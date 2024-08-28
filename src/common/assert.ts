@@ -9,7 +9,9 @@ export const _assert = async (
 	maxRetriesPerAssertion: number,
 	assertionTemperature: number,
 ) => {
-	const screenshot = await page.screenshot();
+	const screenshot = await page.screenshot({
+		fullPage: true,
+	});
 
 	const { object } = await generateObject({
 		model: languageModel,
