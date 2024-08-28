@@ -4,14 +4,6 @@ import type { Interaction } from '../schemas/Interaction';
 export const _interact = async (page: Page, interaction: Interaction) => {
 	const { type } = interaction;
 
-	/* Generic Interactions */
-	if (type === 'scroll') {
-		await page.evaluate(() => {
-			window.scrollBy(0, window.innerHeight);
-		});
-		return;
-	}
-
 	/* Element Interactions */
 	const { annotation } = interaction;
 

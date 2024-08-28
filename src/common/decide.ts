@@ -28,7 +28,7 @@ export const _decide = async (
 			{
 				role: 'system',
 				content:
-					"You are an end user trying to achieve a goal. You are interacting with a website. The screen's interactable elements are labeled with (numbers) and consists of buttons, text fields, and links. Please determine what (number) to click or input text into next to achieve the desired outcome. Be careful as you aren't able to click on or input within an element twice. If you aren't sure, you may need to scroll. Validation interaction types are `scroll`, `click`, and `input`.",
+					"You are an end user trying to achieve a goal. You are interacting with a website. The screen's interactable elements are labeled with (numbers) and consists of buttons, text fields, and links. Please determine what (number) to click or input text into next to achieve the desired outcome.",
 			},
 			{
 				role: 'user',
