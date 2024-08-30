@@ -10,14 +10,15 @@ export const progress = async (
 ) =>
 	element.evaluate(
 		(element) => {
+			const annotation = element.getAttribute('x-pretzelduck-annotation');
+
+			if (annotation == null) {
+				return;
+			}
+
 			const modifiedField = element.getAttribute(
 				'x-pretzelduck-modified-field',
 			) as ModifiedField;
-			const annotation = element.getAttribute('x-pretzelduck-annotation');
-
-			if (!annotation) {
-				return;
-			}
 
 			switch (modifiedField) {
 				case 'text-content': {

@@ -7,7 +7,6 @@ import { _assert } from './assert';
 import { _decide } from './decide';
 import { _interact } from './interact';
 import { progress } from './progress';
-import { ignoreRejection } from './utils/ignoreRejection';
 import { setup } from './setup';
 
 export const _test = (
@@ -60,7 +59,7 @@ export const _test = (
 			const currentPage = page.url();
 
 			if (enabled && previousPage === currentPage && element !== undefined) {
-				await ignoreRejection(progress(element, progressions));
+				await Promise.allSettled([progress(element, progressions)]);
 			}
 		} while (interactionCount < maxInteractions);
 
