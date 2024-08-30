@@ -50,11 +50,7 @@ export const _interact = async (page: Page, interaction: Interaction) => {
 	);
 
 	if (type === 'click') {
-		await element.click({
-			force: true,
-		});
-
-		await page.waitForLoadState('domcontentloaded');
+		await element.dispatchEvent('click');
 
 		return element;
 	}

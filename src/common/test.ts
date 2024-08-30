@@ -41,6 +41,8 @@ export const _test = (
 			const element = await _interact(page, interaction);
 			interactionCount++;
 
+			await page.waitForLoadState('domcontentloaded');
+
 			const goalAchieved = await _assert(
 				languageModel,
 				page,
