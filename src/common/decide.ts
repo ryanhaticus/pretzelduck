@@ -2,7 +2,7 @@ import type { Page } from '@playwright/test';
 import { type LanguageModel, type UserContent, generateObject } from 'ai';
 import type { TestOptions } from '../types/TestOptions';
 
-import { difference } from 'lodash';
+import { clamp, difference } from 'lodash';
 import { INTERACTION_LABELS } from '../types/InteractionLabels';
 import { buildInteractionSchemaFromLabels } from './utils/buildInteractionSchemaFromLabels';
 import { fastScreenshot } from './utils/fastScreenshot';
@@ -76,10 +76,15 @@ export const _decide = async (
 		];
 	}
 
-	const temperatureWithEntropy =
-		Math.round(
+	const temperatureWithEntropy = clamp(
+		(Math.round(
 			(temperature + Math.random() * maxEntropy + Number.EPSILON) * 100,
-		) / 100;
+		) /
+			100) *
+			(Math.random() > 0.5 ? 1 : -1),
+		0,
+		1,
+	);
 
 	const { object } = await generateObject({
 		model: languageModel,
