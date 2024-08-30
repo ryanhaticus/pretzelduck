@@ -19,7 +19,7 @@
     "test",
     "e2e"
   ],
-  "license": "MIT",
+  "license": "AGPL",
   "dependencies": {
     "@ai-sdk/openai": "^0.0.54",
     "ai": "^3.3.19",
