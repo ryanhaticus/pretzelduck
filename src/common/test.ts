@@ -8,6 +8,7 @@ import { _decide } from './decide';
 import { _interact } from './interact';
 import { progress } from './progress';
 import { ignoreRejection } from './utils/ignoreRejection';
+import { setup } from './setup';
 
 export const _test = (
 	test: PlaywrightTest,
@@ -17,6 +18,8 @@ export const _test = (
 	{ assertions, decisions, interactions }: TestOptions,
 ) =>
 	test(goal, async ({ page }) => {
+		await setup(page);
+
 		let interactionCount = 0;
 		let annotationCount = 0;
 

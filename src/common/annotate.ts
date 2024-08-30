@@ -37,6 +37,10 @@ export const _annotate = (
 					continue;
 				}
 
+				if (!window.isElementVisible(element)) {
+					continue;
+				}
+
 				element.setAttribute('x-pretzelduck', 'true');
 
 				const descriptor =
