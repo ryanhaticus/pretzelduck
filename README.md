@@ -106,45 +106,32 @@ Though Pretzel Duck strives to be a 0-configuration solution, more advanced use 
 
 The following options can be provided as a trailing parameter on both the `PretzelDuck` class and the `test` function:
 ```typescript
+type TestOptions = {
 	interactions: {
-	    // The maximum number of interactions (clicks, inputs, scrolls) the model will take before giving up on any given test.
-		maxInteractions: number; // Default is 20.
-		// Specific interactions you'd like to disable.
-		disabled: InteractionLabels[]; // Default is []. Options are 'click', 'input', and 'scroll'.
+		maxInteractions: number;
+		disabled: InteractionLabels[];
 		interactables: {
-		    // The elements you don't want the model to interact with.
-			disabledElements: InteractableElements[]; // Default is []. Many options available.
-			// The roles you don't want the model to interact with.
-			disabledRoles: InteractableRoles[]; // Default is []. Many options available.
+			disabledElements: InteractableElements[];
+			disabledRoles: InteractableRoles[];
 		};
 	};
 	assertions: {
-	    // The maximum number of attempts made to the model to determine if the provided assertion has been met.
-		maxRetries: number; // Default is 2.
-		// The "randomness" of the model when determining if the provided assertion has been met.
-		temperature: number; // Default is 0.1.
+		maxRetries: number;
+		temperature: number;
 	};
 	decisions: {
-	    // The maximum number of attempts made to decide what interaction to perform next.
-		maxRetries: number; // Default is 3.
+		maxRetries: number;
 		progressions: {
-		    // Whether progressions is enabled. Progressions prevent the model from interacting with the same element more than once per navigation.
-			enabled: boolean; // Default is true.
-			// The type of progression used. A forced progression means the model will always progress past the last interaction.
-			type: 'forced'; // Default is 'forced'.
-			// The time taken before giving up on a specific progression. Due to the nature of web page mutations, this field is necessary.
-			// It's important to note, even if a progression fails, the test will continue to run.
-			timeout: number; // Default is 5000 (5 seconds).
+			enabled: boolean;
+			type: 'forced';
+			timeout: number;
 		};
-		// The "randomness" of the model when deciding what interaction to perform next.
-		temperature: number; // Default of 0.3.
-		// The maximum offset for the temperature in either direction, usually used to prevent repetitive interactions.
-		maxEntropy: number; // Default is 0.05.
-		// Whether to include screenshots of the page in the decision making process.
-		useScreenshots: boolean; // Default is true.
-		// Whether to include the visible HTML in the decision making process.
-		useVisibleHtml: boolean; // Default is true.
+		temperature: number;
+		maxEntropy: number;
+		useScreenshots: boolean;
+		useVisibleHtml: boolean;
 	};
+};
 ```
 Here's an example of the configuration in use:
 ```typescript
