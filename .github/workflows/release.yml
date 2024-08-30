@@ -1,0 +1,23 @@
+name: Release
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.10.0'
+      - name: Verify
+        run: npm run verify
+      - name: Build
+        run: npm run build
+      - name: Release
+        run: npm run release

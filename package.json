@@ -2,14 +2,15 @@
   "name": "pretzelduck",
   "author": "Ryan Huellen <ryan@toolshedllc.com>",
   "version": "1.0.0",
-  "description": "Low cost end-to-end testing with Playwright and AI",
+  "description": "Use natural language to write end-to-end tests in Playwright.",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
   "scripts": {
     "build": "rm -rf ./lib && tsc",
     "fix": "biome check --write ./src",
     "lint": "biome lint ./src",
-    "test": "biome ci ./src && jest"
+    "verify": "biome ci ./src && jest",
+    "release": "npx semantic-release"
   },
   "keywords": [
     "pretzelduck",
@@ -36,6 +37,7 @@
     "@types/lodash": "^4.17.7",
     "@types/node": "^22.5.0",
     "jest": "^29.7.0",
+    "semantic-release": "^24.1.0",
     "ts-jest": "^29.2.5",
     "tsx": "^4.19.0",
     "typescript": "^5.5.4"
