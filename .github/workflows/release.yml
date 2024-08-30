@@ -22,7 +22,7 @@ jobs:
       - name: Install dependencies
         run: |
           npm ci
-          npm i @biomejs/cli-linux-x64
+          npm i @biomejs/cli-linux-x64 --no-save
       - name: Verify
         run: npm run verify
       - name: Build
