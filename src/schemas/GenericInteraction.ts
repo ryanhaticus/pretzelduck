@@ -1,6 +1,6 @@
 import { z } from 'zod';
-import { InteractionLabels } from '../types/InteractionLabels';
+import { INTERACTION_LABELS } from '../types/InteractionLabels';
 
 export const GenericInteraction = z.object({
-	type: z.enum(InteractionLabels),
+	type: z.enum(INTERACTION_LABELS),
 });

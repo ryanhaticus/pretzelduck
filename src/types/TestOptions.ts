@@ -19,7 +19,7 @@ export type TestOptions = {
 		maxRetries: number;
 		forcedProgression: boolean;
 		temperature: number;
-		entropy: number;
+		maxEntropy: number;
 		useScreenshots: boolean;
 		useVisibleHtml: boolean;
 	};

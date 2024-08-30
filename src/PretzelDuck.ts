@@ -30,7 +30,7 @@ export class PretzelDuck {
 				maxRetries: 3,
 				forcedProgression: true,
 				temperature: 0.3,
-				entropy: 0.05,
+				maxEntropy: 0.05,
 				useScreenshots: true,
 				useVisibleHtml: true,
 			},

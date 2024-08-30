@@ -37,15 +37,16 @@ export const _annotate = (
 					continue;
 				}
 
+				element.setAttribute('x-pretzelduck', 'true');
+
 				const descriptor =
 					element.getAttribute('role') ??
 					element.getAttribute('type') ??
 					element.tagName;
 
-				element.setAttribute('x-pretzelduck', 'true');
 				element.setAttribute('x-pretzelduck-descriptor', descriptor);
 
-				const annotation = `(${localAnnotationCount})`;
+				const annotation = `(PD:${localAnnotationCount})`;
 				element.setAttribute('x-pretzelduck-annotation', annotation);
 
 				if (element.hasAttribute('placeholder')) {

@@ -6,6 +6,7 @@ import { z } from 'zod';
 import { ClickInteraction } from '../../schemas/ClickInteraction';
 import { InputInteraction } from '../../schemas/InputInteraction';
 import { ScrollInteraction } from '../../schemas/ScrollInteraction';
+import { EnterInteraction } from '../../schemas/EnterInteraction';
 
 export const buildInteractionSchemaFromLabels = (
 	interactionLabels: InteractionLabels[],
@@ -23,6 +24,9 @@ export const buildInteractionSchemaFromLabels = (
 					break;
 				case 'scroll':
 					interaction = ScrollInteraction;
+					break;
+				case 'enter':
+					interaction = EnterInteraction;
 					break;
 				default:
 					throw new Error(`Unknown interaction label: ${interactionLabel}`);

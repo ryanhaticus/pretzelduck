@@ -7,6 +7,7 @@ import { _assert } from './assert';
 import { _decide } from './decide';
 import { _interact } from './interact';
 import { progress } from './progress';
+import { ignoreRejection } from './utils/ignoreRejection';
 
 export const _test = (
 	test: PlaywrightTest,
@@ -32,14 +33,10 @@ export const _test = (
 				decisions,
 			);
 
+			const previousPage = page.url();
+
 			const element = await _interact(page, interaction);
 			interactionCount++;
-
-			const { forcedProgression } = decisions;
-
-			if (forcedProgression && element !== undefined) {
-				await progress(element);
-			}
 
 			const goalAchieved = await _assert(
 				languageModel,
@@ -50,6 +47,18 @@ export const _test = (
 
 			if (goalAchieved) {
 				return;
+			}
+
+			const { forcedProgression } = decisions;
+
+			const currentPage = page.url();
+
+			if (
+				forcedProgression &&
+				previousPage === currentPage &&
+				element !== undefined
+			) {
+				await ignoreRejection(progress(element));
 			}
 		} while (interactionCount < maxInteractions);
 

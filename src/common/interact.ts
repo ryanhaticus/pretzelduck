@@ -36,11 +36,17 @@ export const _interact = async (page: Page, interaction: Interaction) => {
 		return;
 	}
 
+	if (type === 'enter') {
+		await page.keyboard.press('Enter');
+
+		return;
+	}
+
 	/* Element Interactions */
 	const { annotation } = interaction;
 
 	const element = await page.locator(
-		`[x-pretzelduck-annotation="(${annotation})"]`,
+		`[x-pretzelduck-annotation="(PD:${annotation})"]`,
 	);
 
 	if (type === 'click') {

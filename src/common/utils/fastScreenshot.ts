@@ -11,8 +11,9 @@ export const fastScreenshot = async (page: Page) => {
 	const name = browser.browserType().name();
 
 	if (name === 'chromium') {
-		const { send } = await context.newCDPSession(page);
-		const { data } = await send('Page.captureScreenshot');
+		const session = await page.context().newCDPSession(page);
+		const { data } = await session.send('Page.captureScreenshot');
+
 		return Buffer.from(data, 'base64');
 	}
 

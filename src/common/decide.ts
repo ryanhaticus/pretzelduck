@@ -14,6 +14,7 @@ export const _decide = async (
 	{ disabled }: TestOptions['interactions'],
 	{
 		temperature,
+		maxEntropy,
 		maxRetries,
 		useScreenshots,
 		useVisibleHtml,
@@ -101,16 +102,21 @@ export const _decide = async (
 		];
 	}
 
+	const temperatureWithEntropy =
+		Math.round(
+			(temperature + Math.random() * maxEntropy + Number.EPSILON) * 100,
+		) / 100;
+
 	const { object } = await generateObject({
 		model: languageModel,
 		schema: interactions,
 		maxRetries: maxRetries,
-		temperature: temperature,
+		temperature: temperatureWithEntropy,
 		messages: [
 			{
 				role: 'system',
-				content:
-					"You are an end user trying to achieve a goal. You are interacting with a website. The screen's interactable elements are labeled with (numbers) and consists of buttons, text fields, and links. Please determine what (number) to click or input text into next to achieve the desired outcome.",
+				content: `You are an end user trying to achieve a goal. You are interacting with a website. The screen's interactable elements are labeled with annotations (PD:number) and consists of buttons, text fields, and links. Please determine what annotation number to click or input text into next to achieve the desired outcome. You also have certain keyboard inputs. If you aren't sure, you may need to scroll.
+				\nValid interaction types are: ${INTERACTION_LABELS.join(', ')}`,
 			},
 			{
 				role: 'user',
