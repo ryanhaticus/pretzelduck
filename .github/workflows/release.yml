@@ -16,7 +16,7 @@ jobs:
         with:
           node-version: '20.10.0'
       - name: Install dependencies
-        run: npm install
+        run: npm ci
       - name: Verify
         run: npm run verify
       - name: Build
