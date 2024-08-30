@@ -1,6 +1,7 @@
 import type { LanguageModel } from './index';
 import type { PlaywrightTest } from './types/PlaywrightTest';
 import type { TestOptions } from './types/TestOptions';
+import type { RecursivePartial } from './types/RecursivePartial';
 
 import { merge } from 'lodash';
 import { _test } from './common/test';
@@ -13,7 +14,7 @@ export class PretzelDuck {
 	constructor(
 		playwrightTest: PlaywrightTest,
 		languageModel: LanguageModel,
-		testOptions: TestOptions = {
+		testOptions: RecursivePartial<TestOptions> = {
 			interactions: {
 				maxInteractions: 20,
 				disabled: [],
@@ -38,17 +39,17 @@ export class PretzelDuck {
 				useScreenshots: true,
 				useVisibleHtml: true,
 			},
-		},
+		} satisfies TestOptions,
 	) {
 		this.playwrightTest = playwrightTest;
 		this.languageModel = languageModel;
-		this.testOptions = testOptions;
+		this.testOptions = testOptions as TestOptions;
 	}
 
 	public test = (
 		goal: string,
 		assertion: string,
-		testOptions: Partial<TestOptions> = this.testOptions,
+		testOptions: RecursivePartial<TestOptions> = this.testOptions,
 	) =>
 		_test(
 			this.playwrightTest,
