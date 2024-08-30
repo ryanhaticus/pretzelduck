@@ -28,7 +28,11 @@ export class PretzelDuck {
 			},
 			decisions: {
 				maxRetries: 3,
-				forcedProgression: true,
+				progressions: {
+					enabled: true,
+					type: 'forced',
+					timeout: 5000,
+				},
 				temperature: 0.3,
 				maxEntropy: 0.05,
 				useScreenshots: true,

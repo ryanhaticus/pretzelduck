@@ -17,7 +17,11 @@ export type TestOptions = {
 	};
 	decisions: {
 		maxRetries: number;
-		forcedProgression: boolean;
+		progressions: {
+			enabled: boolean;
+			type: 'forced';
+			timeout: number;
+		};
 		temperature: number;
 		maxEntropy: number;
 		useScreenshots: boolean;

@@ -54,16 +54,13 @@ export const _test = (
 				return;
 			}
 
-			const { forcedProgression } = decisions;
+			const { progressions } = decisions;
+			const { enabled } = progressions;
 
 			const currentPage = page.url();
 
-			if (
-				forcedProgression &&
-				previousPage === currentPage &&
-				element !== undefined
-			) {
-				await ignoreRejection(progress(element));
+			if (enabled && previousPage === currentPage && element !== undefined) {
+				await ignoreRejection(progress(element, progressions));
 			}
 		} while (interactionCount < maxInteractions);
 

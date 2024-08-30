@@ -1,8 +1,13 @@
 import type { Locator } from '@playwright/test';
 import type { ModifiedField } from '../types/ModifiableField';
+import type { TestOptions } from '../types/TestOptions';
+
 import { replaceLast } from './utils/replaceLast';
 
-export const progress = async (element: Locator) =>
+export const progress = async (
+	element: Locator,
+	{ timeout }: TestOptions['decisions']['progressions'],
+) =>
 	element.evaluate(
 		(element) => {
 			const modifiedField = element.getAttribute(
@@ -49,6 +54,6 @@ export const progress = async (element: Locator) =>
 		},
 		undefined,
 		{
-			timeout: 1000,
+			timeout,
 		},
 	);
