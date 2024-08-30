@@ -164,3 +164,7 @@ pretzelDuck.test(
 	},
 );
 ```
+
+## Architecture
+![image](https://github.com/user-attachments/assets/cd056925-29c8-4fff-bad3-3af6bc66da5e)
+
