@@ -1,23 +1,23 @@
 import type { Page } from '@playwright/test';
 import { type LanguageModel, generateObject } from 'ai';
+import type { TestOptions } from '../types/TestOptions';
+
 import { Assertion } from '../schemas/Assertion';
+import { fastScreenshot } from './utils/fastScreenshot';
 
 export const _assert = async (
 	languageModel: LanguageModel,
 	page: Page,
 	assertion: string,
-	maxRetriesPerAssertion: number,
-	assertionTemperature: number,
+	{ maxRetries, temperature }: TestOptions['assertions'],
 ) => {
-	const screenshot = await page.screenshot({
-		fullPage: true,
-	});
+	const screenshot = await fastScreenshot(page);
 
 	const { object } = await generateObject({
 		model: languageModel,
 		schema: Assertion,
-		maxRetries: maxRetriesPerAssertion,
-		temperature: assertionTemperature,
+		maxRetries,
+		temperature,
 		messages: [
 			{
 				role: 'system',

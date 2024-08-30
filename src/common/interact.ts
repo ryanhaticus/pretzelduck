@@ -4,16 +4,52 @@ import type { Interaction } from '../schemas/Interaction';
 export const _interact = async (page: Page, interaction: Interaction) => {
 	const { type } = interaction;
 
+	/* Generic Interactions */
+	if (type === 'scroll') {
+		const { direction, numberOfPixels } = interaction;
+
+		await page.evaluate(
+			({ direction, numberOfPixels }) => {
+				const absoluteNumberOfPixels = Math.abs(numberOfPixels);
+
+				switch (direction) {
+					case 'up':
+						window.scrollBy(0, absoluteNumberOfPixels);
+						break;
+					case 'down':
+						window.scrollBy(0, absoluteNumberOfPixels);
+						break;
+					case 'right':
+						window.scrollBy(absoluteNumberOfPixels, 0);
+						break;
+					case 'left':
+						window.scrollBy(absoluteNumberOfPixels, 0);
+						break;
+				}
+			},
+			{
+				direction,
+				numberOfPixels,
+			},
+		);
+
+		return;
+	}
+
 	/* Element Interactions */
 	const { annotation } = interaction;
 
-	const element = await page
-		.locator(`[placeholder*="(${annotation})"]`)
-		.or(page.locator(`[value*="(${annotation})"]`))
-		.or(page.getByText(`(${annotation})`));
+	const element = await page.locator(
+		`[x-pretzelduck-annotation="(${annotation})"]`,
+	);
 
 	if (type === 'click') {
-		await element.click();
+		await element.click({
+			force: true,
+		});
+
+		await page.waitForLoadState('domcontentloaded');
+
 		return element;
 	}
 
@@ -21,8 +57,7 @@ export const _interact = async (page: Page, interaction: Interaction) => {
 		const { value } = interaction;
 
 		await element.fill(value);
+
 		return element;
 	}
-
-	await page.waitForLoadState('networkidle');
 };

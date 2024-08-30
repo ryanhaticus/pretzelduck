@@ -1,3 +1,3 @@
-export const InteractionLabels = ['click', 'input'] as const;
+export const INTERACTION_LABELS = ['click', 'input', 'scroll'] as const;
 
-export type InteractionLabels = (typeof InteractionLabels)[number];
+export type InteractionLabels = (typeof INTERACTION_LABELS)[number];

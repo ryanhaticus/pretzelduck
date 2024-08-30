@@ -1,11 +1,7 @@
 import type { LanguageModel } from 'ai';
-import type { Interaction } from '../schemas/Interaction';
 import type { PlaywrightTest } from '../types/PlaywrightTest';
 import type { TestOptions } from '../types/TestOptions';
 
-import _ from 'lodash';
-import { InteractableElements } from '../types/InteractableElements';
-import { InteractionLabels } from '../types/InteractionLabels';
 import { _annotate } from './annotate';
 import { _assert } from './assert';
 import { _decide } from './decide';
@@ -17,55 +13,31 @@ export const _test = (
 	languageModel: LanguageModel,
 	goal: string,
 	assertion: string,
-	{
-		disabledInteractions,
-		disabledInteractableElements,
-		maxInteractions,
-		maxRetriesPerInteraction,
-		maxRetriesPerAssertion,
-		forcedProgression,
-		decisionTemperature,
-		assertionTemperature,
-	}: TestOptions,
+	{ assertions, decisions, interactions }: TestOptions,
 ) =>
 	test(goal, async ({ page }) => {
-		const interactionLabels = _.difference(
-			InteractionLabels,
-			disabledInteractions,
-		);
-
-		const interactableElementsSelector = _.difference(
-			InteractableElements,
-			disabledInteractableElements,
-		).join(', ');
-
 		let interactionCount = 0;
-		let previousPageURL: string | undefined = undefined;
+		let annotationCount = 0;
+
+		const { interactables, maxInteractions } = interactions;
 
 		do {
-			if (previousPageURL !== page.url()) {
-				await _annotate(page, interactableElementsSelector);
-
-				previousPageURL = page.url();
-			}
+			annotationCount += await _annotate(page, interactables, annotationCount);
 
 			const interaction = await _decide(
 				languageModel,
 				goal,
 				page,
-				interactionLabels,
-				maxRetriesPerInteraction,
-				decisionTemperature,
+				interactions,
+				decisions,
 			);
 
 			const element = await _interact(page, interaction);
 			interactionCount++;
 
-			if (
-				forcedProgression &&
-				previousPageURL === page.url() &&
-				element !== undefined
-			) {
+			const { forcedProgression } = decisions;
+
+			if (forcedProgression && element !== undefined) {
 				await progress(element);
 			}
 
@@ -73,8 +45,7 @@ export const _test = (
 				languageModel,
 				page,
 				assertion,
-				maxRetriesPerAssertion,
-				assertionTemperature,
+				assertions,
 			);
 
 			if (goalAchieved) {

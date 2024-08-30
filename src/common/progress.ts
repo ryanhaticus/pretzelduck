@@ -1,36 +1,49 @@
 import type { Locator } from '@playwright/test';
+import type { ModifiedField } from '../types/ModifiableField';
 
 export const progress = async (element: Locator) =>
 	element.evaluate((element) => {
-		if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
-			const type = element.getAttribute('type');
+		const modifiedField = element.getAttribute(
+			'x-pretzelduck-modified-field',
+		) as ModifiedField;
+		const annotation = element.getAttribute('x-pretzelduck-annotation');
 
-			if (type === 'button' || type === 'submit') {
-				const value = element.getAttribute('value');
+		if (!annotation) {
+			return;
+		}
 
-				if (!value) {
+		switch (modifiedField) {
+			case 'text-content': {
+				const { textContent } = element;
+
+				if (textContent == null) {
 					return;
 				}
 
-				element.setAttribute('value', value.replace(/\s\(\d+\)/, ''));
+				// should replace last instance of annotation with ''
+				const lastAnnotationIndex = textContent.lastIndexOf(annotation);
+				const newTextContent = textContent.slice(0, lastAnnotationIndex);
 
-				return;
+				element.textContent = newTextContent;
+
+				break;
 			}
+			case 'placeholder':
+			case 'value': {
+				const attribute = modifiedField;
 
-			const placeholder = element.getAttribute('placeholder');
+				const attributeValue = element.getAttribute(attribute);
 
-			if (!placeholder) {
-				return;
+				if (attributeValue == null) {
+					return;
+				}
+
+				const lastAnnotationIndex = attributeValue.lastIndexOf(annotation);
+				const newValue = attributeValue.slice(0, lastAnnotationIndex);
+
+				element.setAttribute(attribute, newValue);
+
+				break;
 			}
-
-			element.setAttribute('placeholder', placeholder.replace(/\s\(\d+\)/, ''));
-
-			return;
 		}
-
-		if (!element.textContent) {
-			return;
-		}
-
-		element.textContent = element.textContent.replace(/\s\(\d+\)/, '');
 	});

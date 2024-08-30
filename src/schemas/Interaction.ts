@@ -1,8 +1,13 @@
 import { z } from 'zod';
 import { ClickInteraction } from './ClickInteraction';
 import { InputInteraction } from './InputInteraction';
+import { ScrollInteraction } from './ScrollInteraction';
 
-export const Interaction = z.union([ClickInteraction, InputInteraction]);
+export const Interaction = z.union([
+	ClickInteraction,
+	InputInteraction,
+	ScrollInteraction,
+]);
 
 export type InteractionSchema = typeof Interaction;
 

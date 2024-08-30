@@ -2,7 +2,7 @@ import type { LanguageModel } from './index';
 import type { PlaywrightTest } from './types/PlaywrightTest';
 import type { TestOptions } from './types/TestOptions';
 
-import _ from 'lodash';
+import { merge } from 'lodash';
 import { _test } from './common/test';
 
 export class PretzelDuck {
@@ -14,14 +14,26 @@ export class PretzelDuck {
 		playwrightTest: PlaywrightTest,
 		languageModel: LanguageModel,
 		testOptions: TestOptions = {
-			maxRetriesPerInteraction: 3,
-			maxInteractions: 20,
-			disabledInteractableElements: [],
-			disabledInteractions: [],
-			maxRetriesPerAssertion: 2,
-			forcedProgression: true,
-			decisionTemperature: 0.4,
-			assertionTemperature: 0.1,
+			interactions: {
+				maxInteractions: 20,
+				disabled: [],
+				interactables: {
+					disabledElements: [],
+					disabledRoles: [],
+				},
+			},
+			assertions: {
+				maxRetries: 2,
+				temperature: 0.1,
+			},
+			decisions: {
+				maxRetries: 3,
+				forcedProgression: true,
+				temperature: 0.3,
+				entropy: 0.05,
+				useScreenshots: true,
+				useVisibleHtml: true,
+			},
 		},
 	) {
 		this.playwrightTest = playwrightTest;
@@ -39,6 +51,6 @@ export class PretzelDuck {
 			this.languageModel,
 			goal,
 			assertion,
-			_.merge(this.testOptions, testOptions),
+			merge(this.testOptions, testOptions),
 		);
 }

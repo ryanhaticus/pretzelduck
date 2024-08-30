@@ -1,4 +1,4 @@
-export const InteractableElements = [
+export const INTERACTABLE_ELEMENTS = [
 	'button',
 	'input',
 	'a',
@@ -6,4 +6,4 @@ export const InteractableElements = [
 	'select',
 ] as const;
 
-export type InteractableElements = (typeof InteractableElements)[number];
+export type InteractableElements = (typeof INTERACTABLE_ELEMENTS)[number];

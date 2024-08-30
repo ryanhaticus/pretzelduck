@@ -1,12 +1,15 @@
-import { z } from 'zod';
-import { ClickInteraction } from '../schemas/ClickInteraction';
-import { InputInteraction } from '../schemas/InputInteraction';
-
 import type { ZodTypeAny } from 'zod';
-import type { InteractionSchema } from '../schemas/Interaction';
-import type { InteractionLabels } from '../types/InteractionLabels';
+import type { InteractionSchema } from '../../schemas/Interaction';
+import type { InteractionLabels } from '../../types/InteractionLabels';
 
-export const buildInteractions = (interactionLabels: InteractionLabels[]) => {
+import { z } from 'zod';
+import { ClickInteraction } from '../../schemas/ClickInteraction';
+import { InputInteraction } from '../../schemas/InputInteraction';
+import { ScrollInteraction } from '../../schemas/ScrollInteraction';
+
+export const buildInteractionSchemaFromLabels = (
+	interactionLabels: InteractionLabels[],
+) => {
 	const interactions = interactionLabels.reduce(
 		(acc: ZodTypeAny | undefined, interactionLabel) => {
 			let interaction: ZodTypeAny;
@@ -17,6 +20,9 @@ export const buildInteractions = (interactionLabels: InteractionLabels[]) => {
 					break;
 				case 'input':
 					interaction = InputInteraction;
+					break;
+				case 'scroll':
+					interaction = ScrollInteraction;
 					break;
 				default:
 					throw new Error(`Unknown interaction label: ${interactionLabel}`);
