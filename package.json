@@ -3,7 +3,7 @@
   "author": "Ryan Huellen <ryan@toolshedllc.com>",
   "version": "1.0.0",
   "description": "Use natural language to write end-to-end tests in Playwright.",
-  "repository": "https://github.com/ryanhaticus/pretzelduck",
+  "repository": "https://github.com/ryanhaticus/pretzelduck.git",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
   "scripts": {
