@@ -1,7 +1,7 @@
 import type { LanguageModel } from './index';
 import type { PlaywrightTest } from './types/PlaywrightTest';
-import type { TestOptions } from './types/TestOptions';
 import type { RecursivePartial } from './types/RecursivePartial';
+import type { TestOptions } from './types/TestOptions';
 
 import { merge } from 'lodash';
 import { _test } from './common/test';

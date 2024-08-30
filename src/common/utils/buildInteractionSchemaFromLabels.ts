@@ -4,9 +4,9 @@ import type { InteractionLabels } from '../../types/InteractionLabels';
 
 import { z } from 'zod';
 import { ClickInteraction } from '../../schemas/ClickInteraction';
+import { EnterInteraction } from '../../schemas/EnterInteraction';
 import { InputInteraction } from '../../schemas/InputInteraction';
 import { ScrollInteraction } from '../../schemas/ScrollInteraction';
-import { EnterInteraction } from '../../schemas/EnterInteraction';
 
 export const buildInteractionSchemaFromLabels = (
 	interactionLabels: InteractionLabels[],

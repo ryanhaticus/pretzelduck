@@ -1,6 +1,6 @@
 import type { Page } from '@playwright/test';
-import type { TestOptions } from '../types/TestOptions';
 import type { ModifiedField } from '../types/ModifiableField';
+import type { TestOptions } from '../types/TestOptions';
 
 import { difference } from 'lodash';
 import { INTERACTABLE_ELEMENTS } from '../types/InteractableElements';
