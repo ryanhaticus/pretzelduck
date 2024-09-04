@@ -58,4 +58,6 @@ export class PretzelDuck {
 			assertion,
 			merge(this.testOptions, testOptions),
 		);
+
+	public it = this.test;
 }
