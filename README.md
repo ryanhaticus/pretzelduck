@@ -25,7 +25,7 @@ describe("search functionality", () => {
 
 ## Why
 End-to-end (E2E) testing in its current form is often not practical for various reasons:
-- Writing them takes a long time.
+- Writing end-to-end tests takes a long time.
 - Often, in order to use end-to-end tests effectively, you need to maintain a mock API or have control over your environment's data.
 - Seemingly small UI changes can break end-to-end tests, requiring you spend additional time fixing them.
 
@@ -35,11 +35,11 @@ From the author:
 ## Features
 
 - Simple to use with good defaults
-    - Just provide a natural language `goal` and an `assertion` for every test
+    - Just provide a natural language `goal` and `assertion` for every test
 - Interactions such as clicking, inputting text, scrolling, and hitting enter
 - Highly configurable with a BYOM (bring your own model) approach
 - Use existing Playwright DX features like tracing and UI
-- **Save engineering time.**
+- **Saves engineering time**
 
 ## Getting Started
 - [I don't have an existing Playwright test suite](#i-dont-have-an-existing-playwright-test-suite)
