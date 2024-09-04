@@ -25,7 +25,6 @@
   ],
   "license": "AGPL",
   "dependencies": {
-    "@ai-sdk/openai": "^0.0.54",
     "ai": "^3.3.19",
     "lodash": "^4.17.21",
     "zod": "^3.23.8"
