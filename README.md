@@ -17,8 +17,8 @@ describe("search functionality", () => {
 	});
 
 	it(
-		"find and favorite the Pretzel Duck repository",
-		"the favorite button should be highlighted on a GitHub repository titled Pretzel Duck",
+		"should find and favorite the Pretzel Duck repository",
+		"the favorite button should be highlighted yellow on a GitHub repository titled Pretzel Duck",
 	);
 });
 ```
