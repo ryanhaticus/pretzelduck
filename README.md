@@ -7,16 +7,20 @@ Use natural language to write end-to-end tests in Playwright.
 import { PretzelDuck, openai } from "pretzelduck";
 import { test } from "@playwright/test";
 
-export const pretzelDuck = new PretzelDuck(test, openai("gpt-4o"));
+const { describe, beforeEach } = test;
 
-test.beforeEach(async ({ page }) => {
-	await page.goto("https://github.com/");
+const { it } = new PretzelDuck(test, openai("gpt-4o"));
+
+describe("search functionality", () => {
+	beforeEach(async ({ page }) => {
+		await page.goto("https://github.com/");
+	});
+
+	it(
+		"find and favorite the Pretzel Duck repository",
+		"the favorite button should be highlighted on a GitHub repository titled Pretzel Duck",
+	);
 });
-
-pretzelDuck.test(
-	"find and favorite the Pretzel Duck repository",
-	"the favorite button should be highlighted on a GitHub repository titled Pretzel Duck",
-);
 ```
 
 ## Why
