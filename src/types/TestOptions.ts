@@ -14,6 +14,7 @@ export type TestOptions = {
 	assertions: {
 		maxRetries: number;
 		temperature: number;
+		immediate: boolean;
 	};
 	decisions: {
 		maxRetries: number;
@@ -41,6 +42,7 @@ export const DEFAULT_TEST_OPTIONS: TestOptions = {
 	assertions: {
 		maxRetries: 2,
 		temperature: 0.1,
+		immediate: false,
 	},
 	decisions: {
 		maxRetries: 3,

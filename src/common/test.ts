@@ -19,6 +19,21 @@ export const _test = (
 	test(goal, async ({ page }) => {
 		await setup(page);
 
+		const { immediate } = assertions;
+
+		if (immediate) {
+			const goalAchieved = await _assert(
+				languageModel,
+				page,
+				assertion,
+				assertions,
+			);
+
+			if (goalAchieved) {
+				return;
+			}
+		}
+
 		let interactionCount = 0;
 		let annotationCount = 0;
 
