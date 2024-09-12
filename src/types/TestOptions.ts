@@ -28,3 +28,30 @@ export type TestOptions = {
 		useVisibleHtml: boolean;
 	};
 };
+
+export const DEFAULT_TEST_OPTIONS: TestOptions = {
+	interactions: {
+		maxInteractions: 20,
+		disabled: [],
+		interactables: {
+			disabledElements: [],
+			disabledRoles: [],
+		},
+	},
+	assertions: {
+		maxRetries: 2,
+		temperature: 0.1,
+	},
+	decisions: {
+		maxRetries: 3,
+		progressions: {
+			enabled: true,
+			type: 'forced',
+			timeout: 5000,
+		},
+		temperature: 0.3,
+		maxEntropy: 0.05,
+		useScreenshots: true,
+		useVisibleHtml: true,
+	},
+} as const;
