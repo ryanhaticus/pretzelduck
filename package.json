@@ -6,8 +6,8 @@
   "repository": {
     "url": "git+https://github.com/ryanhaticus/pretzelduck.git"
   },
-  "main": "./lib/index.js",
-  "types": "./lib/index.d.ts",
+  "main": "index.js",
+  "types": "index.d.ts",
   "scripts": {
     "build": "rm -rf ./lib && tsc",
     "fix": "biome check --write ./src",
