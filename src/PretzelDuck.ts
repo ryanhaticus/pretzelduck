@@ -14,7 +14,7 @@ export class PretzelDuck {
 	constructor(
 		playwrightTest: PlaywrightTest,
 		languageModel: LanguageModel,
-		testOptions: RecursivePartial<TestOptions>,
+		testOptions: RecursivePartial<TestOptions> = {},
 	) {
 		this.playwrightTest = playwrightTest;
 		this.languageModel = languageModel;
@@ -24,7 +24,7 @@ export class PretzelDuck {
 	public test = (
 		goal: string,
 		assertion: string,
-		testOptions: RecursivePartial<TestOptions> = this.testOptions,
+		testOptions: RecursivePartial<TestOptions> = {},
 	) =>
 		_test(
 			this.playwrightTest,
