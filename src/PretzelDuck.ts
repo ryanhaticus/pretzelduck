@@ -1,4 +1,4 @@
-import type { LanguageModel } from './index';
+import type { LanguageModel } from 'ai';
 import type { PlaywrightTest } from './types/PlaywrightTest';
 import type { RecursivePartial } from './types/RecursivePartial';
 import { DEFAULT_TEST_OPTIONS, type TestOptions } from './types/TestOptions';
