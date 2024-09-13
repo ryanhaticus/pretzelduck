@@ -122,6 +122,7 @@ type TestOptions = {
 	assertions: {
 		maxRetries: number;
 		temperature: number;
+		immediate: boolean;
 	};
 	decisions: {
 		maxRetries: number;
