@@ -16,6 +16,8 @@ export const progress = async (
 				return;
 			}
 
+			element.removeAttribute('x-pretzelduck-annotation');
+
 			const modifiedField = element.getAttribute(
 				'x-pretzelduck-modified-field',
 			) as ModifiedField;
