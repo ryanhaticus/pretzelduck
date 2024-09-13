@@ -5,6 +5,10 @@ export const _interact = async (page: Page, interaction: Interaction) => {
 	const { type } = interaction;
 
 	/* Generic Interactions */
+	if (type === 'wait') {
+		return;
+	}
+
 	if (type === 'scroll') {
 		const { direction, numberOfPixels } = interaction;
 
