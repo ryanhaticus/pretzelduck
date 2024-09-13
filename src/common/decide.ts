@@ -94,8 +94,8 @@ export const _decide = async (
 		messages: [
 			{
 				role: 'system',
-				content: `You are an end user trying to achieve a goal. You are interacting with a website. The screen's interactable elements are labeled with annotations (PD:number) and consists of buttons, text fields, and links. Please determine what annotation number to click or input text into next to achieve the desired outcome. You also have certain keyboard inputs. If you aren't sure, you may need to scroll.
-				\nValid interaction types are: ${INTERACTION_LABELS.join(', ')}`,
+				content: `You are an end user trying to achieve a goal. You are interacting with a website. The page's interactable elements are labeled with annotations (PD:annotation-number) and consists of buttons, text fields, and links. Please determine what annotation-number to interact with and how next to achieve the desired outcome. If you aren't sure what to interact with next, you may need to scroll. If something is loading, you may need to wait.
+				\nValid interaction types (how to interact) are: ${INTERACTION_LABELS.join(', ')}`,
 			},
 			{
 				role: 'user',
