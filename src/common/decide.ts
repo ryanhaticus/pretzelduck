@@ -34,7 +34,7 @@ ${goal}`,
 		},
 	];
 
-	if (useHistory) {
+	if (useHistory && history !== '') {
 		userContent = [
 			...userContent,
 			{
