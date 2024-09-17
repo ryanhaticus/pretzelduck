@@ -1,62 +1,58 @@
-import type { Locator } from '@playwright/test';
+import type { Page } from '@playwright/test';
 import type { ModifiedField } from '../types/ModifiableField';
-import type { TestOptions } from '../types/TestOptions';
 
 import { replaceLast } from './utils/replaceLast';
 
-export const progress = async (
-	element: Locator,
-	{ timeout }: TestOptions['decisions']['progressions'],
-) =>
-	element.evaluate(
-		(element) => {
-			const annotation = element.getAttribute('x-pretzelduck-annotation');
+export const progress = async (page: Page, selector: string) =>
+	page.evaluate((selector) => {
+		const element = document.querySelector(selector);
 
-			if (annotation == null) {
-				return;
-			}
+		if (element == null) {
+			return;
+		}
 
-			element.removeAttribute('x-pretzelduck-annotation');
+		const annotation = element.getAttribute('x-pretzelduck-annotation');
 
-			const modifiedField = element.getAttribute(
-				'x-pretzelduck-modified-field',
-			) as ModifiedField;
+		if (annotation == null) {
+			return;
+		}
 
-			switch (modifiedField) {
-				case 'text-content': {
-					const { textContent } = element;
+		element.removeAttribute('x-pretzelduck-annotation');
 
-					if (textContent == null) {
-						return;
-					}
+		const modifiedField = element.getAttribute(
+			'x-pretzelduck-modified-field',
+		) as ModifiedField;
 
-					const newTextContent = replaceLast(textContent, annotation, '');
+		switch (modifiedField) {
+			case 'text-content': {
+				const { textContent } = element;
 
-					element.textContent = newTextContent;
-
-					break;
+				if (textContent == null) {
+					return;
 				}
-				case 'placeholder':
-				case 'value': {
-					const attribute = modifiedField;
 
-					const attributeValue = element.getAttribute(attribute);
+				const newTextContent = replaceLast(textContent, annotation, '');
 
-					if (attributeValue == null) {
-						return;
-					}
+				element.textContent = newTextContent;
 
-					const lastAnnotationIndex = attributeValue.lastIndexOf(annotation);
-					const newValue = attributeValue.slice(0, lastAnnotationIndex);
-
-					element.setAttribute(attribute, newValue);
-
-					break;
-				}
+				break;
 			}
-		},
-		undefined,
-		{
-			timeout,
-		},
-	);
+			case 'placeholder':
+			case 'value': {
+				const attribute = modifiedField;
+
+				const attributeValue = element.getAttribute(attribute);
+
+				if (attributeValue == null) {
+					return;
+				}
+
+				const lastAnnotationIndex = attributeValue.lastIndexOf(annotation);
+				const newValue = attributeValue.slice(0, lastAnnotationIndex);
+
+				element.setAttribute(attribute, newValue);
+
+				break;
+			}
+		}
+	}, selector);

@@ -49,21 +49,20 @@ export const _interact = async (page: Page, interaction: Interaction) => {
 	/* Element Interactions */
 	const { annotation } = interaction;
 
-	const element = await page.locator(
-		`[x-pretzelduck-annotation="(PD:${annotation})"]`,
-	);
+	const selector = `[x-pretzelduck-annotation="(PD:${annotation})"]`;
+
+	const element = await page.locator(selector);
 
 	if (type === 'click') {
 		await element.dispatchEvent('click');
-
-		return element;
 	}
 
 	if (type === 'input') {
 		const { value } = interaction;
 
+		await element.focus();
 		await element.fill(value);
-
-		return element;
 	}
+
+	return selector;
 };

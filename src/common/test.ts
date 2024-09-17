@@ -61,7 +61,7 @@ export const _test = (
 
 			const previousPage = page.url();
 
-			const element = await _interact(page, interaction);
+			const selector = await _interact(page, interaction);
 			interactionCount++;
 
 			await page.waitForLoadState('domcontentloaded');
@@ -82,8 +82,8 @@ export const _test = (
 
 			const currentPage = page.url();
 
-			if (enabled && previousPage === currentPage && element !== undefined) {
-				await Promise.allSettled([progress(element, progressions)]);
+			if (enabled && previousPage === currentPage && selector !== undefined) {
+				await progress(page, selector);
 			}
 		} while (interactionCount < maxInteractions);
 

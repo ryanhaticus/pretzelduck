@@ -21,7 +21,6 @@ export type TestOptions = {
 		progressions: {
 			enabled: boolean;
 			type: 'forced';
-			timeout: number;
 		};
 		temperature: number;
 		maxEntropy: number;
@@ -50,7 +49,6 @@ export const DEFAULT_TEST_OPTIONS: TestOptions = {
 		progressions: {
 			enabled: true,
 			type: 'forced',
-			timeout: 5000,
 		},
 		temperature: 0.3,
 		maxEntropy: 0.05,
