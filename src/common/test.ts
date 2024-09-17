@@ -79,14 +79,10 @@ export const _test = (
 
 			const currentPage = page.url();
 
-			const isSamePage = previousPage === currentPage;
-
-			if (!isSamePage) {
-				annotationCount = 0;
-			}
-
 			const { progressions } = decisions;
 			const { enabled } = progressions;
+
+			const isSamePage = previousPage === currentPage;
 
 			if (enabled && isSamePage && selector !== undefined) {
 				await progress(page, selector);
