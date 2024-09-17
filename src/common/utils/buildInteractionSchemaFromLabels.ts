@@ -7,6 +7,7 @@ import { ClickInteraction } from '../../schemas/ClickInteraction';
 import { EnterInteraction } from '../../schemas/EnterInteraction';
 import { InputInteraction } from '../../schemas/InputInteraction';
 import { ScrollInteraction } from '../../schemas/ScrollInteraction';
+import { WaitInteraction } from '../../schemas/WaitInteraction';
 
 export const buildInteractionSchemaFromLabels = (
 	interactionLabels: InteractionLabels[],
@@ -27,6 +28,9 @@ export const buildInteractionSchemaFromLabels = (
 					break;
 				case 'enter':
 					interaction = EnterInteraction;
+					break;
+				case 'wait':
+					interaction = WaitInteraction;
 					break;
 				default:
 					throw new Error(`Unknown interaction label: ${interactionLabel}`);
