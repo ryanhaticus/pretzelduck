@@ -73,6 +73,7 @@ export const _test = (
 				page,
 				assertion,
 				assertions,
+				history,
 			);
 
 			if (goalAchieved) {

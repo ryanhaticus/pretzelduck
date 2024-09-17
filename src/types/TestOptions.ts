@@ -15,6 +15,7 @@ export type TestOptions = {
 		maxRetries: number;
 		temperature: number;
 		immediate: boolean;
+		useHistory: boolean;
 	};
 	decisions: {
 		maxRetries: number;
@@ -43,6 +44,7 @@ export const DEFAULT_TEST_OPTIONS: TestOptions = {
 		maxRetries: 2,
 		temperature: 0.1,
 		immediate: false,
+		useHistory: true,
 	},
 	decisions: {
 		maxRetries: 3,
