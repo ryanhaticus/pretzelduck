@@ -41,6 +41,8 @@ export const _test = (
 		const { interactables, maxInteractions } = interactions;
 
 		do {
+			await page.waitForLoadState('domcontentloaded');
+
 			annotationCount += await _annotate(page, interactables, annotationCount);
 
 			const interaction = await _decide(
