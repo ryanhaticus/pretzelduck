@@ -129,12 +129,12 @@ type TestOptions = {
 		progressions: {
 			enabled: boolean;
 			type: 'forced';
-			timeout: number;
 		};
 		temperature: number;
 		maxEntropy: number;
 		useScreenshots: boolean;
 		useVisibleHtml: boolean;
+		useHistory: boolean;
 	};
 };
 ```
