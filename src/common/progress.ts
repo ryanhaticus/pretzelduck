@@ -1,8 +1,6 @@
 import type { Page } from '@playwright/test';
 import type { ModifiedField } from '../types/ModifiableField';
 
-import { replaceLast } from './utils/replaceLast';
-
 export const progress = async (page: Page, selector: string) =>
 	page.evaluate((selector) => {
 		const element = document.querySelector(selector);
@@ -31,7 +29,7 @@ export const progress = async (page: Page, selector: string) =>
 					return;
 				}
 
-				const newTextContent = replaceLast(textContent, annotation, '');
+				const newTextContent = window.replaceLast(textContent, annotation, '');
 
 				element.textContent = newTextContent;
 
@@ -47,8 +45,7 @@ export const progress = async (page: Page, selector: string) =>
 					return;
 				}
 
-				const lastAnnotationIndex = attributeValue.lastIndexOf(annotation);
-				const newValue = attributeValue.slice(0, lastAnnotationIndex);
+				const newValue = window.replaceLast(attributeValue, annotation, '');
 
 				element.setAttribute(attribute, newValue);
 
