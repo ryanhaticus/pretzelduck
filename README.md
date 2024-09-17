@@ -145,7 +145,7 @@ import { test } from "@playwright/test";
 
 export const pretzelDuck = new PretzelDuck(test, /* Your Model Here */, {
 	interactions: {
-		disabled: ["enter"],
+		disabled: ["submit"],
 		interactables: {
 			disabledElements: ["select"],
 			disabledRoles: ["menuitem"],

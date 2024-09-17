@@ -4,9 +4,9 @@ import type { InteractionLabels } from '../../types/InteractionLabels';
 
 import { z } from 'zod';
 import { ClickInteraction } from '../../schemas/ClickInteraction';
-import { EnterInteraction } from '../../schemas/EnterInteraction';
 import { InputInteraction } from '../../schemas/InputInteraction';
 import { ScrollInteraction } from '../../schemas/ScrollInteraction';
+import { SubmitInteraction } from '../../schemas/SubmitInteraction';
 import { WaitInteraction } from '../../schemas/WaitInteraction';
 
 export const buildInteractionSchemaFromLabels = (
@@ -26,8 +26,8 @@ export const buildInteractionSchemaFromLabels = (
 				case 'scroll':
 					interaction = ScrollInteraction;
 					break;
-				case 'enter':
-					interaction = EnterInteraction;
+				case 'submit':
+					interaction = SubmitInteraction;
 					break;
 				case 'wait':
 					interaction = WaitInteraction;

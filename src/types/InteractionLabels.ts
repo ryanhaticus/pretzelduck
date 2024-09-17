@@ -2,7 +2,7 @@ export const INTERACTION_LABELS = [
 	'click',
 	'input',
 	'scroll',
-	'enter',
+	'submit',
 	'wait',
 ] as const;
 

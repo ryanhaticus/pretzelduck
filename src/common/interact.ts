@@ -40,7 +40,7 @@ export const _interact = async (page: Page, interaction: Interaction) => {
 		return;
 	}
 
-	if (type === 'enter') {
+	if (type === 'submit') {
 		await page.keyboard.press('Enter');
 
 		return;

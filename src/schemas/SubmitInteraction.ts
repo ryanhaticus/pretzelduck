@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { GenericInteraction } from './GenericInteraction';
 
-export const EnterInteraction = GenericInteraction.extend({
-	type: z.literal('enter'),
+export const SubmitInteraction = GenericInteraction.extend({
+	type: z.literal('submit'),
 });
