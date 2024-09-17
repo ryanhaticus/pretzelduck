@@ -13,29 +13,14 @@ export const setup = async (page: Page) => {
 				return false;
 			}
 
-			const { x, y, height, width } = element.getBoundingClientRect();
-			const { innerWidth, innerHeight, scrollX, scrollY } = window;
+			const { top, bottom } = element.getBoundingClientRect();
 
-			const elementTop = y + scrollY;
-			const elementBottom = elementTop + height;
-			const elementLeft = x + scrollX;
-			const elementRight = elementLeft + width;
+			const viewHeight = Math.max(
+				document.documentElement.clientHeight,
+				window.innerHeight,
+			);
 
-			const viewportTop = scrollY;
-			const viewportBottom = innerHeight + scrollY;
-			const viewportLeft = scrollX;
-			const viewportRight = innerWidth + scrollX;
-
-			const topVisible =
-				elementTop >= viewportTop && elementTop <= viewportBottom;
-			const bottomVisible =
-				elementBottom >= viewportTop && elementBottom <= viewportBottom;
-			const leftVisible =
-				elementLeft >= viewportLeft && elementLeft <= viewportRight;
-			const rightVisible =
-				elementRight >= viewportLeft && elementRight <= viewportRight;
-
-			return topVisible || bottomVisible || leftVisible || rightVisible;
+			return !(bottom < 0 || top - viewHeight >= 0);
 		};
 
 		window.replaceLast = (str: string, find: string, replace: string) => {
@@ -45,7 +30,9 @@ export const setup = async (page: Page) => {
 				return str;
 			}
 
-			return `${str.substring(0, index)}${replace}${str.substring(index + find.length)}`;
+			return `${str.substring(0, index)}${replace}${str.substring(
+				index + find.length,
+			)}`;
 		};
 	});
 

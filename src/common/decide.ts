@@ -116,13 +116,13 @@ What:
 Interactable elements are labeled with (PD:1), (PD:2), etc., always in a (PD:#) format.
 
 Task:
-You must choose a labeled element # and user interaction on that element to get closer to achieving the goal. You should also provide a short description of the action you're performing so you can recall it later.
+You must choose a labeled element # and user interaction on that element to get closer to achieving the goal. You should also provide a short 1 sentence description of the action you're performing so you can recall it later.
 
 Valid Interaction Types:
 ${INTERACTION_LABELS.join(', ')}
 
 Rules and Caveats:
-If you aren't sure what to interact with next, you may need to scroll. If the page's content is still loading OR content is clearly missing that would prevent you from achieving the goal, you MUST wait.`,
+If you aren't sure what to interact with next or are uncertain, you may need to scroll to see more elements. If the page's content is still loading OR content is clearly missing that would prevent you from achieving the goal, you MUST wait.`,
 			},
 			{
 				role: 'user',
