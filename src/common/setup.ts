@@ -37,4 +37,6 @@ export const setup = async (page: Page) => {
 			return topVisible || bottomVisible || leftVisible || rightVisible;
 		};
 	});
+
+	await page.reload();
 };
