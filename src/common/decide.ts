@@ -71,7 +71,8 @@ export const _decide = async (
 			...userContent,
 			{
 				type: 'text',
-				text: visibleHtml,
+				text: `HTML:
+${visibleHtml}`,
 			},
 		];
 	}
@@ -94,9 +95,15 @@ export const _decide = async (
 		messages: [
 			{
 				role: 'system',
-				content: `You are an end user trying to achieve a goal. You are interacting with a website. The page's interactable elements are labeled with annotations (PD:annotation-number) and consists of buttons, radio buttons, text fields, dropdowns, date pickers, and links. Please determine what annotation-number to interact with next to achieve the desired outcome.
-				If you aren't sure what to interact with next, you may need to scroll. If something is loading, you may need to wait. Please think hard about your decision to complete the goal in the least possible interactions. Please respond with a single interaction as only one can be performed at a time.
-				\nValid interaction types (how to interact) are: ${INTERACTION_LABELS.join(', ')}`,
+				content: `Who: You are an end-user trying to achieve a goal by interacting with a website.
+				
+What: Interactable elements are labeled with (PD:1), (PD:2), etc., always in a (PD:#) format.
+
+Task: You must choose a labeled element # and user interaction on that element to get closer to achieving the goal. You should also provide a short description of the action you're performing so you can recall it later.
+
+Valid Interaction Types: ${INTERACTION_LABELS.join(', ')}
+
+Rules and Caveats: If you aren't sure what to interact with next, you may need to scroll. If the page has any loading sections or content clearly missing that would prevent you from achieving the goal, you must wait.`,
 			},
 			{
 				role: 'user',
