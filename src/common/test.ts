@@ -36,6 +36,7 @@ export const _test = (
 
 		let interactionCount = 0;
 		let annotationCount = 0;
+		let history = '';
 
 		const { interactables, maxInteractions } = interactions;
 
@@ -45,10 +46,18 @@ export const _test = (
 			const interaction = await _decide(
 				languageModel,
 				goal,
+				history,
 				page,
 				interactions,
 				decisions,
 			);
+
+			const { useHistory } = decisions;
+
+			if (useHistory) {
+				const { description } = interaction;
+				history += `- ${description}\n`;
+			}
 
 			const previousPage = page.url();
 

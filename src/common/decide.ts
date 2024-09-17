@@ -10,6 +10,7 @@ import { fastScreenshot } from './utils/fastScreenshot';
 export const _decide = async (
 	languageModel: LanguageModel,
 	goal: string,
+	history: string,
 	page: Page,
 	{ disabled }: TestOptions['interactions'],
 	{
@@ -18,6 +19,7 @@ export const _decide = async (
 		maxRetries,
 		useScreenshots,
 		useVisibleHtml,
+		useHistory,
 	}: TestOptions['decisions'],
 ) => {
 	const interactions = buildInteractionSchemaFromLabels(
@@ -27,9 +29,21 @@ export const _decide = async (
 	let userContent: UserContent = [
 		{
 			type: 'text',
-			text: `Goal: ${goal}`,
+			text: `Goal:
+${goal}`,
 		},
 	];
+
+	if (useHistory) {
+		userContent = [
+			...userContent,
+			{
+				type: 'text',
+				text: `History:
+${history}`,
+			},
+		];
+	}
 
 	if (useScreenshots) {
 		const screenshot = await fastScreenshot(page);
@@ -95,15 +109,20 @@ ${visibleHtml}`,
 		messages: [
 			{
 				role: 'system',
-				content: `Who: You are an end-user trying to achieve a goal by interacting with a website.
+				content: `Who:
+You are an end-user trying to achieve a goal by interacting with a website.
 				
-What: Interactable elements are labeled with (PD:1), (PD:2), etc., always in a (PD:#) format.
+What:
+Interactable elements are labeled with (PD:1), (PD:2), etc., always in a (PD:#) format.
 
-Task: You must choose a labeled element # and user interaction on that element to get closer to achieving the goal. You should also provide a short description of the action you're performing so you can recall it later.
+Task:
+You must choose a labeled element # and user interaction on that element to get closer to achieving the goal. You should also provide a short description of the action you're performing so you can recall it later.
 
-Valid Interaction Types: ${INTERACTION_LABELS.join(', ')}
+Valid Interaction Types:
+${INTERACTION_LABELS.join(', ')}
 
-Rules and Caveats: If you aren't sure what to interact with next, you may need to scroll. If the page has any loading sections or content clearly missing that would prevent you from achieving the goal, you must wait.`,
+Rules and Caveats:
+If you aren't sure what to interact with next, you may need to scroll. If the page has any loading sections or content clearly missing that would prevent you from achieving the goal, you must wait.`,
 			},
 			{
 				role: 'user',

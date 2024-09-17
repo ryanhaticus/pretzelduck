@@ -27,6 +27,7 @@ export type TestOptions = {
 		maxEntropy: number;
 		useScreenshots: boolean;
 		useVisibleHtml: boolean;
+		useHistory: boolean;
 	};
 };
 
@@ -55,5 +56,6 @@ export const DEFAULT_TEST_OPTIONS: TestOptions = {
 		maxEntropy: 0.05,
 		useScreenshots: true,
 		useVisibleHtml: true,
+		useHistory: true,
 	},
 } as const;
