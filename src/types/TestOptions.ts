@@ -42,7 +42,7 @@ export const DEFAULT_TEST_OPTIONS: TestOptions = {
 	assertions: {
 		maxRetries: 2,
 		temperature: 0.1,
-		immediate: true,
+		immediate: false,
 	},
 	decisions: {
 		maxRetries: 3,
