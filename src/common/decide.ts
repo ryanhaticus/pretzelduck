@@ -122,7 +122,7 @@ Valid Interaction Types:
 ${INTERACTION_LABELS.join(', ')}
 
 Rules and Caveats:
-If you aren't sure what to interact with next, you may need to scroll. If the page has any loading sections or content clearly missing that would prevent you from achieving the goal, you must wait.`,
+If you aren't sure what to interact with next, you may need to scroll. If the page's content is still loading OR content is clearly missing that would prevent you from achieving the goal, you MUST wait.`,
 			},
 			{
 				role: 'user',

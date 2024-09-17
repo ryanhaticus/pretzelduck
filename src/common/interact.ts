@@ -51,7 +51,15 @@ export const _interact = async (page: Page, interaction: Interaction) => {
 
 	const selector = `[x-pretzelduck-annotation="(PD:${annotation})"]`;
 
-	const element = await page.locator(selector);
+	const element = page.locator(selector);
+
+	try {
+		await element.waitFor({
+			timeout: 100,
+		});
+	} catch {
+		return;
+	}
 
 	if (type === 'click') {
 		await element.dispatchEvent('click');
