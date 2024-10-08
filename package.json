@@ -30,11 +30,11 @@
     "zod": "^3.23.8"
   },
   "peerDependencies": {
-    "@playwright/test": "^1.46.1"
+    "@playwright/test": "^1.47.2"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.8.3",
-    "@playwright/test": "^1.46.1",
+    "@playwright/test": "^1.47.2",
     "@types/jest": "^29.5.12",
     "@types/lodash": "^4.17.7",
     "@types/node": "^22.5.0",
