@@ -9,7 +9,7 @@ import { test } from "@playwright/test";
 
 const { describe, beforeEach } = test;
 
-const { it } = new PretzelDuck(test, openai("gpt-4o"));
+const { it } = new PretzelDuck(test, openai("o1-preview"));
 
 describe("search functionality", () => {
 	beforeEach(async ({ page }) => {
@@ -76,7 +76,7 @@ import { test } from '@playwright/test';
     This example uses `openai`, but others are available.
     You will need to provide an API key using the respective environment variables.
 */
-const model = openai('gpt-4o');
+const model = openai('o1-preview');
 
 export const pretzelDuck = new PretzelDuck(test, model);
 ```
