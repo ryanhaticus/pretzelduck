@@ -1,8 +1,6 @@
 # Pretzel Duck
 Use natural language to write end-to-end tests in Playwright.
 
-> :warning:  The Pretzel Duck project is in it's early stages. Please expect frequent changes and improvements.
-
 ```typescript
 import { PretzelDuck, openai } from "pretzelduck";
 import { test } from "@playwright/test";
