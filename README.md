@@ -7,7 +7,7 @@ import { test } from "@playwright/test";
 
 const { describe, beforeEach } = test;
 
-const { it } = new PretzelDuck(test, openai("o1-preview"));
+const { it } = new PretzelDuck(test, openai("gpt-4o"));
 
 describe("search functionality", () => {
 	beforeEach(async ({ page }) => {
@@ -62,9 +62,12 @@ You'll first need to install Pretzel Duck via [npm](https://www.npmjs.com/).
 npm i pretzelduck
 ```
 
+You'll also need to install the AI SDK of your choice. This example uses OpenAI.
+
 Next, create a `pretzelduck.ts` file that's accessible from your testing suite.
 ```typescript
-import { PretzelDuck, openai } from 'pretzelduck';
+import { PretzelDuck } from 'pretzelduck';
+import { openai } from '@ai-sdk/openai';
 import { test } from '@playwright/test';
 
 /*
@@ -74,7 +77,7 @@ import { test } from '@playwright/test';
     This example uses `openai`, but others are available.
     You will need to provide an API key using the respective environment variables.
 */
-const model = openai('o1-preview');
+const model = openai('gpt-4o');
 
 export const pretzelDuck = new PretzelDuck(test, model);
 ```
